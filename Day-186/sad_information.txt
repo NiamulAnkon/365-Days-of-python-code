@@ -1,0 +1,3 @@
+Coustomer  Info: ('sad', 22, 'sad@gmailcom', 123)
+Date for start: 14
+selected package: 2

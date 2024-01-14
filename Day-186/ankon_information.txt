@@ -1,0 +1,3 @@
+Coustomer  Info: ('ankon', 15, 'ankon@gmailcom', 1920)
+Date for start: 15
+selected package: 1
