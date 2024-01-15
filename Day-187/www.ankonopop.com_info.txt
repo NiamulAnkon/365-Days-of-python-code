@@ -1,0 +1,2 @@
+User info:[('ankon', 19, 'bangladesh')]
+Domain info: [('www.ankonopop.com', '197.80.90')]
