@@ -1,0 +1,6 @@
+Item,Quantity
+Apple,2
+Beef,30
+chicken,20
+butter,10
+egg,20
