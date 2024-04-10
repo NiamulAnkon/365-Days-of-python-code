@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="img"/>
+  <qresource prefix="newPrefix">
+    <file>eidbackground.jpg</file>
+  </qresource>
+</RCC>
