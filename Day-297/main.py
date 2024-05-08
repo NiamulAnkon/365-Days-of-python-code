@@ -1,0 +1,137 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet("background-color: qradialgradient(spread:reflect, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(120, 120, 120, 255), stop:0.977273 rgba(235, 243, 250, 255), stop:1 rgba(0, 0, 0, 0));")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+
+        self.Header = QtWidgets.QLabel(self.centralwidget)
+        self.Header.setGeometry(QtCore.QRect(6, 0, 791, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.Header.setFont(font)
+        self.Header.setAlignment(QtCore.Qt.AlignCenter)
+        self.Header.setObjectName("Header")
+
+        self.bookname = QtWidgets.QLineEdit(self.centralwidget)
+        self.bookname.setGeometry(QtCore.QRect(10, 70, 141, 20))
+        self.bookname.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.bookname.setObjectName("bookname")
+
+        self.clientname = QtWidgets.QLineEdit(self.centralwidget)
+        self.clientname.setGeometry(QtCore.QRect(180, 70, 151, 20))
+        self.clientname.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.clientname.setObjectName("clientname")
+
+        self.bkname = QtWidgets.QLabel(self.centralwidget)
+        self.bkname.setGeometry(QtCore.QRect(10, 40, 151, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.bkname.setFont(font)
+        self.bkname.setAlignment(QtCore.Qt.AlignCenter)
+        self.bkname.setObjectName("bkname")
+
+        self.clname = QtWidgets.QLabel(self.centralwidget)
+        self.clname.setGeometry(QtCore.QRect(180, 40, 151, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.clname.setFont(font)
+        self.clname.setAlignment(QtCore.Qt.AlignCenter)
+        self.clname.setObjectName("clname")
+
+        self.bkname_list = QtWidgets.QListWidget(self.centralwidget)
+        self.bkname_list.setGeometry(QtCore.QRect(0, 170, 801, 431))
+        self.bkname_list.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+"color: rgb(255, 255, 255);")
+        self.bkname_list.setObjectName("bkname_list")
+
+        self.days = QtWidgets.QComboBox(self.centralwidget)
+        self.days.setGeometry(QtCore.QRect(360, 70, 141, 22))
+        self.days.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.days.setObjectName("days")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+        self.days.addItem("")
+
+        self.dayslabel = QtWidgets.QLabel(self.centralwidget)
+        self.dayslabel.setGeometry(QtCore.QRect(360, 40, 151, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.dayslabel.setFont(font)
+        self.dayslabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.dayslabel.setObjectName("dayslabel")
+        self.aprlabel = QtWidgets.QLabel(self.centralwidget)
+        self.aprlabel.setGeometry(QtCore.QRect(540, 40, 151, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.aprlabel.setFont(font)
+        self.aprlabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.aprlabel.setObjectName("aprlabel")
+        self.approval = QtWidgets.QComboBox(self.centralwidget)
+        self.approval.setGeometry(QtCore.QRect(550, 70, 141, 22))
+        self.approval.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.approval.setObjectName("approval")
+        self.approval.addItem("")
+        self.approval.addItem("")
+
+        self.Addbtn = QtWidgets.QPushButton(self.centralwidget)
+        self.Addbtn.setGeometry(QtCore.QRect(300, 120, 101, 31))
+        self.Addbtn.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.Addbtn.setObjectName("Addbtn")
+        self.Addbtn.clicked.connect(self.add_item)
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.Header.setText(_translate("MainWindow", "Library Managment System"))
+        self.bkname.setText(_translate("MainWindow", "Books Name"))
+        self.clname.setText(_translate("MainWindow", "Clients Name"))
+        self.days.setItemText(0, _translate("MainWindow", "1"))
+        self.days.setItemText(1, _translate("MainWindow", "2"))
+        self.days.setItemText(2, _translate("MainWindow", "3"))
+        self.days.setItemText(3, _translate("MainWindow", "4"))
+        self.days.setItemText(4, _translate("MainWindow", "5"))
+        self.days.setItemText(5, _translate("MainWindow", "6"))
+        self.days.setItemText(6, _translate("MainWindow", "7"))
+        self.days.setItemText(7, _translate("MainWindow", "8"))
+        self.days.setItemText(8, _translate("MainWindow", "9"))
+        self.days.setItemText(9, _translate("MainWindow", "10"))
+        self.dayslabel.setText(_translate("MainWindow", "Days"))
+        self.aprlabel.setText(_translate("MainWindow", "Approval"))
+        self.approval.setItemText(0, _translate("MainWindow", "Rent"))
+        self.approval.setItemText(1, _translate("MainWindow", "Buy"))
+        self.Addbtn.setText(_translate("MainWindow", "Add"))
+    
+    def add_item(self):
+        book_name = self.bookname.text()
+        client_name = self.clientname.text()
+        days = self.days.currentText()
+        approval = self.approval.currentText()
+        ordered_details = f'Book Name: {book_name}, client_name: {client_name}, Days: {days}, Approval: {approval}'
+        self.bkname_list.addItem(ordered_details)
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
