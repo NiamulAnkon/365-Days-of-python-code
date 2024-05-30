@@ -1,0 +1,90 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+from pytube import YouTube
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.header = QtWidgets.QLabel(self.centralwidget)
+        self.header.setGeometry(QtCore.QRect(0, 0, 801, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.header.setFont(font)
+        self.header.setAlignment(QtCore.Qt.AlignCenter)
+        self.header.setObjectName("header")
+        self.ytvdufdlab = QtWidgets.QLabel(self.centralwidget)
+        self.ytvdufdlab.setGeometry(QtCore.QRect(170, 90, 461, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.ytvdufdlab.setFont(font)
+        self.ytvdufdlab.setAlignment(QtCore.Qt.AlignCenter)
+        self.ytvdufdlab.setObjectName("ytvdufdlab")
+        self.urls = QtWidgets.QLineEdit(self.centralwidget)
+        self.urls.setGeometry(QtCore.QRect(2, 140, 791, 20))
+        self.urls.setObjectName("urls")
+        self.dwnldbtn = QtWidgets.QPushButton(self.centralwidget)
+        self.dwnldbtn.setGeometry(QtCore.QRect(320, 220, 111, 51))
+        self.dwnldbtn.setObjectName("dwnldbtn")
+        self.dwnldbtn.clicked.connect(self.download_video)
+        self.mesg = QtWidgets.QLabel(self.centralwidget)
+        self.mesg.setGeometry(QtCore.QRect(140, 490, 471, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.mesg.setFont(font)
+        self.mesg.setText("")
+        self.mesg.setAlignment(QtCore.Qt.AlignCenter)
+        self.mesg.setObjectName("mesg")
+        self.pathlab = QtWidgets.QLabel(self.centralwidget)
+        self.pathlab.setGeometry(QtCore.QRect(140, 310, 461, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pathlab.setFont(font)
+        self.pathlab.setAlignment(QtCore.Qt.AlignCenter)
+        self.pathlab.setObjectName("pathlab")
+        self.path = QtWidgets.QLineEdit(self.centralwidget)
+        self.path.setGeometry(QtCore.QRect(10, 360, 791, 20))
+        self.path.setObjectName("path")
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.header.setText(_translate("MainWindow", "Youtube Video Downloader"))
+        self.ytvdufdlab.setText(_translate("MainWindow", "Youtube Video URL For Download"))
+        self.dwnldbtn.setText(_translate("MainWindow", "Download"))
+        self.pathlab.setText(_translate("MainWindow", "Path where you want to svae"))
+    
+    def download_video(self, url, path_save):
+        url = self.urls.text()
+        path_save = self.path.text()
+        try:
+            yt = YouTube(url)
+            streams = yt.streams.filter(progressive=True, file_extension="mp4")
+            highest_res = streams.get_highest_resolution()
+            highest_res.download(output_path=path_save)
+            print("video DOwnloaded succesfuly")
+        except Exception as e:
+            print(e)
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
