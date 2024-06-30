@@ -1,50 +1,32 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import schedule
-import time
-import os
+import pandas as pd
 
-# Function to send email
-def send_email():
-    # Email credentials (use environment variables for security)
-    email_user = os.getenv('EMAIL_USER')
-    email_password = os.getenv('EMAIL_PASSWORD')
-    email_send = 'recipient@example.com'
-    subject = 'Daily Report'
+class Analyzing_Movie_Ratings_Data:
+    def data_summarry(self):
+        movie_rating_data = {
+        'Movie ID': [1, 2, 3, 4, 5, 6, 7, 8],
+        'Movie Title': [
+        'The Shawshank Redemption', 'The Godfather', 'The Dark Knight',
+        'Pulp Fiction', 'Schindler\'s List', 'Inception',
+        'Fight Club', 'Forrest Gump'
+        ],
+        'Genre': ['Drama', 'Crime', 'Action', 'Crime', 'Biography', 'Sci-Fi', 'Drama', 'Drama'],
+        'Rating': [9.3, 9.2, 9.0, 8.9, 8.9, 8.8, 8.8, 8.8],
+        'Number of Ratings': [2300000, 1600000, 2300000, 1700000, 1200000, 2000000, 1700000, 1900000]
+    }
+        
+        data_frame = pd.DataFrame(movie_rating_data)
 
-    # Create the email content
-    msg = MIMEMultipart()
-    msg['From'] = email_user
-    msg['To'] = email_send
-    msg['Subject'] = subject
+        avrage_rating = data_frame['Rating'].mean()
+        total_numbers_of_ratings = data_frame['Number of Ratings'].sum()
 
-    # Sample email body (you can customize this)
-    body = 'This is your daily report.'
-    msg.attach(MIMEText(body, 'plain'))
+        avrage_rating_for_each_genre = data_frame.groupby('Genre')['Rating'].mean()
+        total_rating_for_each_genre = data_frame.groupby('Genre')['Rating'].sum()
 
-    # Set up the server
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(email_user, email_password)
+        top_3_highest_rated_movie = data_frame.nlargest(3, 'Rating')[['Movie Title', 'Rating']]
+        top_3_most_rated_movie = data_frame.nlargest(3, 'Number of Ratings')[['Movie Title', 'Number of Ratings']]
 
-    # Send the email
-    text = msg.as_string()
-    server.sendmail(email_user, email_send, text)
-    server.quit()
-    print("Email sent successfully")
-
-# Function to schedule the email sending
-def schedule_email():
-    # Schedule the send_email function to run
-    schedule.every().day.at("09:00").do(send_email)
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+        print(f"Avrage Rating: {avrage_rating}\n Total Numbers Of Rating: {total_numbers_of_ratings}\nAvrage Rating For Each Genre: {avrage_rating_for_each_genre}\nTotal Rating For Each Genre: {total_rating_for_each_genre}\nTop 3 Highest Rated Movie: {top_3_highest_rated_movie}\nTop 3 Most Rated Movie: {top_3_most_rated_movie}")
 
 if __name__ == "__main__":
-    if not os.getenv('EMAIL_USER') or not os.getenv('EMAIL_PASSWORD'):
-        print("Please set the EMAIL_USER and EMAIL_PASSWORD environment variables")
-    else:
-        schedule_email()
+    amrd = Analyzing_Movie_Ratings_Data()
+    amrd.data_summarry()
